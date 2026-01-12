@@ -23,10 +23,11 @@ for file in ${inp_dir}/*.bam
 do 	
 	name=$(basename "$file" .bam)
 	echo "------traitement: de $name----------"
-	# generons les fichiers bam avec uniquement les reads qui se sont appariés efficacement
+	# Etape 1: Filtrage des reads correctement appariés (-f 2)
 	samtools view -f 2 -b "$file" -o "${out_dir}/${name}.paired.properly.bam"
-	# trie et indexation du fichier
+	# Étape 2 : Tri par coordonnées
 	samtools sort "$out_dir/${name}.paired.properly.bam" -o "${out_dir}/${name}.sorted.bam"
-  samtools index "${out_dir}/${name}.sorted.bam"
+	# Étape 3 : Indexation
+  	samtools index "${out_dir}/${name}.sorted.bam"
   echo  "finish pour : $name"
 done
