@@ -28,6 +28,6 @@ echo "generation du fichier vcf des snps a partir de notre bcf generer."
 bcftools call -mv "$out_dir/all.samples.bcf" -Ov -o "$out_dir/all.samples.vcf"
 # indexons le fichier VCF avec la commande bcftools view
 echo "indexation dd fichier VCF"
-bcftools view "$out_dir/all.samples.vcf"
-bcftools index "$out_dir/all.samples.vcf"
+bcftools view "$out_dir/all.samples.bcf" -Ov -o "$out_dir/all.samples.vcf.gz"
+bcftools index "$out_dir/all.samples.vcf.gz"
 echo "fin de l'appel SNPs"
